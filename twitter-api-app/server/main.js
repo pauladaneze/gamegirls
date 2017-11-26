@@ -23,7 +23,7 @@ client.get('favorites/list', function(error, tweets, response) {
   console.log(response);  // Raw response object. 
 });
 
-client.get('statuses/update', {status: '#metoo'})
+client.post('statuses/update', {status: 'test'})
   .then(function (tweet) {
     console.log(tweet);
   })
