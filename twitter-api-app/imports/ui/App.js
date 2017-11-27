@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Display from './Display.js'; 
 
+
+
 export default class App extends Component {
 
   getAsteroids() {
     return [
       { _id: 1, text: 'metoo' },
       { _id: 2, text: 'metoo' },
-      { _id: 3, text: 'metoo' },
+      { _id: 3, text: 'metoo3' },
 
     ];
   }
@@ -24,7 +26,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <header>
-          <h1>react-app</h1>
+          <h1>#metoo</h1>
         </header>
 
         <ul>
@@ -34,5 +36,8 @@ export default class App extends Component {
     );
   }
 }
+
+
+ 
 
 

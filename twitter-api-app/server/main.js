@@ -4,9 +4,9 @@ import { Asteroids } from '../imports/api/asteroids.js'
 
 
 
-Meteor.publish('twitter', function asteroidsPublication() {
-  return Asteroids.find();
-});
+//Meteor.publish('twitter', function asteroidsPublication() {
+//  return Twitter.find();
+//});
 
 var Twitter = require('twitter');
 
@@ -17,20 +17,23 @@ var client = new Twitter({
   access_token_secret: 'oVPh5aBq9lSqf1e16WOscLoS98nMOGCLIJXfRuDxaBna3'
 });
 
+
+//client.get(path, params, callback);
+
+
 client.get('favorites/list', function(error, tweets, response) {
   if(error) throw error;
   console.log(tweets);  // The favorites. 
   console.log(response);  // Raw response object. 
 });
 
-client.post('statuses/update', {status: 'test'})
+client.post('statuses/update', {status: 'test4'})
   .then(function (tweet) {
     console.log(tweet);
   })
   .catch(function (error) {
     throw error;
-  })
-
+  });
 
 
 
@@ -66,8 +69,8 @@ client.post('statuses/update', {status: 'test'})
 //})
 
 
-Meteor.startup(() => {
+//Meteor.startup(() => {
   // code to run on server at startup
 
 
-});
+//});
