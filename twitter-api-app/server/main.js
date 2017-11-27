@@ -35,8 +35,16 @@ client.post('statuses/update', {status: 'test4'})
     throw error;
   });
 
-
-
+//this will send all tweets with #metoo to terminal. they are streaming live in mine right now!
+/*var stream = client.stream('statuses/filter', {track: '#metoo'});
+stream.on('data', function(event) {
+  console.log(event && event.text);
+});
+ 
+stream.on('error', function(error) {
+  throw error;
+});
+*/
 
 //Meteor.methods({
   //loadAsteroids: function() {
