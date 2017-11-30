@@ -4,9 +4,9 @@ import { Asteroids } from '../imports/api/asteroids.js'
 
 
 
-//Meteor.publish('twitter', function asteroidsPublication() {
-//  return Twitter.find();
-//});
+Meteor.publish('twitter', function asteroidsPublication() {
+  return Asteroids.find();
+});
 
 var Twitter = require('twitter');
 
@@ -17,34 +17,50 @@ var client = new Twitter({
   access_token_secret: 'oVPh5aBq9lSqf1e16WOscLoS98nMOGCLIJXfRuDxaBna3'
 });
 
+var stream = client.stream('statuses/filter', {track: '#metoo'});
+var count = 0;
+var messageHistory = [];
 
-//client.get(path, params, callback);
-
-
-client.get('favorites/list', function(error, tweets, response) {
-  if(error) throw error;
-  console.log(tweets);  // The favorites. 
-  console.log(response);  // Raw response object. 
-});
-
-client.post('statuses/update', {status: 'test4'})
-  .then(function (tweet) {
-    console.log(tweet);
-  })
-  .catch(function (error) {
-    throw error;
-  });
-
-//this will send all tweets with #metoo to terminal. they are streaming live in mine right now!
-/*var stream = client.stream('statuses/filter', {track: '#metoo'});
 stream.on('data', function(event) {
   console.log(event && event.text);
+  count++;
+  console.log(count);
+
 });
  
 stream.on('error', function(error) {
   throw error;
 });
+ 
+// You can also get the stream in a callback if you prefer. 
+/*client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
+  stream.on('data', function(event) {
+    console.log(event && event.text);
+  });
+ 
+  stream.on('error', function(error) {
+    throw error;
+  });
+});
+
+/*client.get('favorites/list', function(error, tweets, response) {
+  if(error) throw error;
+  console.log(tweets);  // The favorites. 
+  console.log(response);  // Raw response object. 
+});
+
+
+client.post('statuses/update', {status: 'hello'})
+  .then(function (tweet) {
+    console.log(tweet);
+  })
+  .catch(function (error) {
+    throw error;
+  })
+
+
 */
+
 
 //Meteor.methods({
   //loadAsteroids: function() {
@@ -77,8 +93,8 @@ stream.on('error', function(error) {
 //})
 
 
-//Meteor.startup(() => {
+Meteor.startup(() => {
   // code to run on server at startup
 
 
-//});
+});
