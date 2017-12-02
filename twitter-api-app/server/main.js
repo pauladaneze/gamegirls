@@ -49,13 +49,10 @@ function onData(data) {
 // console.log(dataArr);
 
 if (data == 13) {
-<<<<<<< HEAD
 console.log('number of #metoo: ' + count);
 console.log('data from arduino: ' + data);
-=======
 console.log('led');
 //console.log(count);
->>>>>>> d71fbf1e81c08827902c4aa530b341d3a6cf6566
 }
 else { console.log('test');
 } 
