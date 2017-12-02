@@ -33,26 +33,38 @@ var messageHistory = [];
 stream.on('data', function(event) {
  // console.log(event && event.text);
   count++;
-  console.log(count);
+//  console.log(count);
+//console.log('number of #metoo: ' + count);
 });
  
 stream.on('error', function(error) {
   throw error;
 });
 
+//var dataArr = 0;
 // parse the data from serial into meaningful objects
 function onData(data) {
-  console.log("meteor onData: " + data);
- let dataArr = data.split(",");
- console.log(dataArr);
-}
+//console.log("meteor onData: " + data);
+// let dataArr = data.split(",");
+// console.log(dataArr);
 
 if (data == 13) {
-console.log('led');
-//console.log(count);
+console.log('number of #metoo: ' + count);
+console.log('data from arduino: ' + data);
 }
 else { console.log('test');
 } 
+}
+
+
+
+parser.on('data', Meteor.bindEnvironment(onData));
+
+port.on('error', function(err) {
+  console.log('Error: ', err.message);
+})
+
+
 
 
 // serial event
@@ -63,10 +75,35 @@ function writeSerialData(data) {
     if (err) {
       return console.log('Error on write: ', err.message);
     }
-    console.log('meteor wrote', count);
+
+    console.log('test' + count);
+  
   });
 
 }
+
+
+// meteor
+Meteor.methods({
+  'serial.write'(count) {
+
+    // global ok?
+    var message = "";
+
+    // get RGB from hex data
+    var hexValue = rgbHex(pixels[0], pixels[1], pixels[2]);
+
+    message = hexValue;
+
+    writeSerialData(message + '|'); // write data to the port
+    client.publish("ledgrid", message); // publish via mqtt
+    
+  },
+  'send.name'(name) {
+    console.log("Meteor send.name", name);
+    client.publish("name", name);
+  }
+})
 
 
 
