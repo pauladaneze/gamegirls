@@ -1,12 +1,26 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { Asteroids } from '../imports/api/asteroids.js'
+import SerialPort from 'serialport';
+
+const Readline = SerialPort.parsers.Readline;
+const parser = new Readline();
+
+//serial port
+var port = new SerialPort('/dev/cu.usbmodem1411', {
+  baudRate: 9600
+});
+port.pipe(parser);
 
 
+// parse the data from serial into meaningful objects
+function onData(data) {
+  console.log("meteor onData: " + data);
+}
 
-//Meteor.publish('twitter', function asteroidsPublication() {
-//  return Twitter.find();
-//});
+Meteor.publish('twitter', function asteroidsPublication() {
+  return Asteroids.find();
+});
 
 var Twitter = require('twitter');
 
@@ -17,18 +31,15 @@ var client = new Twitter({
   access_token_secret: 'oVPh5aBq9lSqf1e16WOscLoS98nMOGCLIJXfRuDxaBna3'
 });
 
-/*
-client.get('favorites/list', function(error, tweets, response) {
-  if(error) throw error;
-  console.log(tweets);  // The favorites. 
-  console.log(response);  // Raw response object. 
-});
-*/
-
-//this will send all tweets with #metoo to terminal. they are streaming live in mine right now!
 var stream = client.stream('statuses/filter', {track: '#metoo'});
+var count = 0;
+var messageHistory = [];
+
 stream.on('data', function(event) {
   console.log(event && event.text);
+  count++;
+  console.log(count);
+
 });
  
 stream.on('error', function(error) {
@@ -36,41 +47,6 @@ stream.on('error', function(error) {
 });
 
 
-//console.log(event && event.text);
-
-//Meteor.methods({
-  //loadAsteroids: function() {
-   // console.log("loadAsteroids");
-
-    //HTTP.call('GET', 'https://twitter.com/search?q=%23MeToo&src=tyah', {
-    //  params: { api_key: "QoPlW47zYbMPE27tuikPJb3OZ", start_date:"2017-10-17", end_date:"2017-10-24" }
-    //}, (error, result) => {
-     // if (!error) {
-
-       // var data = result.data;
-       // console.log(data["near_earth_objects"])
-
-
-        //for (var obj in data["near_earth_objects"]) {
-          
-          //console.log(obj)
-          //for (var i = 0; i < data["near_earth_objects"][obj].length; i++) {
-          //  console.log(data["near_earth_objects"][obj][i].name);
-          //  Asteroids.insert({text:data["near_earth_objects"][obj][i].name, date:new Date()})
-         // }
-       // }
-
-        // for (var i=0; i < result.content.length; i++) {
-        //   console.log(result.content[i].name);
-        // }
-      //}
-    //});
- // }
-//})
-
-
-//Meteor.startup(() => {
+Meteor.startup(() => {
   // code to run on server at startup
-
-
-//});
+});

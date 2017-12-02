@@ -9,6 +9,8 @@
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "serial": "0.0.9",
+    "serialport": "^6.0.4",
     "twitter": "^1.7.1"
   }
 }
