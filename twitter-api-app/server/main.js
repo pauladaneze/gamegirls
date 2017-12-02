@@ -47,7 +47,7 @@ function onData(data) {
  console.log(dataArr);
 }
 
-if (data == 10) {
+if (data == 13) {
 console.log('led');
 //console.log(count);
 }
