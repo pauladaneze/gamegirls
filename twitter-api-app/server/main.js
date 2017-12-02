@@ -17,26 +17,26 @@ var client = new Twitter({
   access_token_secret: 'oVPh5aBq9lSqf1e16WOscLoS98nMOGCLIJXfRuDxaBna3'
 });
 
-
-//client.get(path, params, callback);
-
-
+/*
 client.get('favorites/list', function(error, tweets, response) {
   if(error) throw error;
   console.log(tweets);  // The favorites. 
   console.log(response);  // Raw response object. 
 });
+*/
 
-client.post('statuses/update', {status: 'test4'})
-  .then(function (tweet) {
-    console.log(tweet);
-  })
-  .catch(function (error) {
-    throw error;
-  });
+//this will send all tweets with #metoo to terminal. they are streaming live in mine right now!
+var stream = client.stream('statuses/filter', {track: '#metoo'});
+stream.on('data', function(event) {
+  console.log(event && event.text);
+});
+ 
+stream.on('error', function(error) {
+  throw error;
+});
 
 
-
+//console.log(event && event.text);
 
 //Meteor.methods({
   //loadAsteroids: function() {
