@@ -11,8 +11,10 @@ export default class App extends Component {
       { _id: 2, text: 'metoo' },
       { _id: 3, text: 'metoo3' },
 
+
     ];
   }
+
 
 
 

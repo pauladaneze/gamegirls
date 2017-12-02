@@ -12,16 +12,11 @@ var port = new SerialPort('/dev/cu.usbmodem1411', {
 });
 port.pipe(parser);
 
-
-// parse the data from serial into meaningful objects
-function onData(data) {
-  console.log("meteor onData: " + data);
-}
-
 Meteor.publish('twitter', function asteroidsPublication() {
   return Asteroids.find();
 });
 
+//twitter api stuff 
 var Twitter = require('twitter');
 
 var client = new Twitter({
@@ -36,15 +31,45 @@ var count = 0;
 var messageHistory = [];
 
 stream.on('data', function(event) {
-  console.log(event && event.text);
+ // console.log(event && event.text);
   count++;
   console.log(count);
-
 });
  
 stream.on('error', function(error) {
   throw error;
 });
+
+// parse the data from serial into meaningful objects
+function onData(data) {
+  console.log("meteor onData: " + data);
+ let dataArr = data.split(",");
+ console.log(dataArr);
+}
+
+if (data == 10) {
+console.log('led');
+//console.log(count);
+}
+else { console.log('test');
+} 
+
+
+// serial event
+function writeSerialData(data) {
+  var buffer = Buffer.from(data);
+
+  port.write(data, function(err) {
+    if (err) {
+      return console.log('Error on write: ', err.message);
+    }
+    console.log('meteor wrote', count);
+  });
+
+}
+
+
+
 
 
 Meteor.startup(() => {
