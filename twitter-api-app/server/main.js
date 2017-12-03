@@ -48,12 +48,20 @@ function onData(data) {
 // let dataArr = data.split(",");
 // console.log(dataArr);
 
+<<<<<<< HEAD
 if (data > 300) {
 console.log('number of #metoo: ' + count);
 console.log('data from arduino: ' + data);
 //console.log('led');
 //console.log(count);
 
+=======
+if (data == 13) {
+console.log('number of #metoo: ' + count);
+console.log('data from arduino: ' + data);
+console.log('led');
+//console.log(count);
+>>>>>>> f287c1721873320baaec06249701142de0d7338f
 }
 else { console.log('test');
 } 
