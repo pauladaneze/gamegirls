@@ -28,7 +28,7 @@ void setup() {
 
 void loop() {
     //
-    //randNumber = random(3);
+    randNumber = random(3);
     volume = analogRead(A0); // Reads the value from the Analog PIN A0
     
   if(volume>=threshold){
