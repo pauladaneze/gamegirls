@@ -31,43 +31,35 @@ var count = 0;
 var messageHistory = [];
 
 stream.on('data', function(event) {
- // console.log(event && event.text);
+  // console.log(event && event.text);
   count++;
-//  console.log(count);
-//console.log('number of #metoo: ' + count);
+  
+  //  console.log(count);
+  //console.log('number of #metoo: ' + count);
 });
  
 stream.on('error', function(error) {
   throw error;
 });
 
+
 //var dataArr = 0;
 // parse the data from serial into meaningful objects
 function onData(data) {
-//console.log("meteor onData: " + data);
-// let dataArr = data.split(",");
-// console.log(dataArr);
-
-<<<<<<< HEAD
-if (data > 300) {
-console.log('number of #metoo: ' + count);
-console.log('data from arduino: ' + data);
-//console.log('led');
-//console.log(count);
-
-=======
-if (data == 13) {
-console.log('number of #metoo: ' + count);
-console.log('data from arduino: ' + data);
-console.log('led');
-//console.log(count);
->>>>>>> f287c1721873320baaec06249701142de0d7338f
+  //console.log("meteor onData: " + data);
+  // let dataArr = data.split(",");
+  // console.log(dataArr);
+  if (data == 100) {
+   console.log('number of #metoo: ' + count);
+   //console.log('led');
+   //console.log(count);
+   writeSerialData(count + '|');
+  } else {
+    console.log('stop');
 }
-else { console.log('test');
-} 
 }
 
-
+//console.log('data from arduino: ' + data);
 
 parser.on('data', Meteor.bindEnvironment(onData));
 
@@ -76,17 +68,15 @@ port.on('error', function(err) {
 })
 
 
-
-
 // serial event
 function writeSerialData(data) {
   var buffer = Buffer.from(data);
 
-  port.write(count, function(err) {
+  port.write(data, function(err) {
     if (err) {
       return console.log('Error on write: ', err.message);
     }
-    console.log('meteor wrote', count);
+    console.log('meteor wrote', data);
   });
 
 }
