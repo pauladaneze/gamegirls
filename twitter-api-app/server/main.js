@@ -28,39 +28,35 @@ var client = new Twitter({
 
 var stream = client.stream('statuses/filter', {track: '#metoo'});
 var count = 0;
+var countMax = 10;
 var messageHistory = [];
 
-stream.on('data', function(event) {
-  // console.log(event && event.text);
-  count++;
- // if (count > 10) {
- //   count == 10;
-    
 
-  //}
-  //  console.log(count);
-  //console.log('number of #metoo: ' + count);
+stream.on('data', function(event) {
+  //console.log(event && event.text);
+  if (count == countMax) {
+    count = 0;
+  }
+  count++;
 });
  
 stream.on('error', function(error) {
   throw error;
 });
 
-
-//var dataArr = 0;
 // parse the data from serial into meaningful objects
 function onData(data) {
   //console.log("meteor onData: " + data);
   // let dataArr = data.split(",");
   // console.log(dataArr);
-  if (data > 500) {
+  if (data == 13) {
    console.log('number of #metoo: ' + count);
    //console.log('arduino:' + data);
    //console.log('led');
    writeSerialData(count + '|');
   } else {
     console.log('stop');
-   console.log('arduino:' + data);
+    console.log('arduino:' + data);
 }
 }
 
@@ -73,21 +69,16 @@ port.on('error', function(err) {
   console.log('Error: ', err.message);
 })
 
-
 // serial event
 function writeSerialData(data) {
   var buffer = Buffer.from(data);
-
   port.write(data, function(err) {
     if (err) {
       return console.log('Error on write: ', err.message);
     }
-   // count = 0;
     console.log('meteor wrote', data);
   });
-
 }
-
 
 Meteor.startup(() => {
   // code to run on server at startup
