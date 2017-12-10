@@ -28,18 +28,31 @@ var client = new Twitter({
 
 var stream = client.stream('statuses/filter', {track: '#metoo'});
 var count = 0;
+<<<<<<< HEAD
 var countMax = 20;
+=======
+var countMax = 10;
+>>>>>>> 32c7fde1271735b98166d6f8137b016bdf652395
 var messageHistory = [];
 //var timeout = 60000;
 //var limit = '1 minute';
 
 
+
 stream.on('data', function(event) {
+<<<<<<< HEAD
 
  if (count == countMax) {
   count = 0;
 }
  count++;
+=======
+  //console.log(event && event.text);
+  if (count == countMax) {
+    count = 0;
+  }
+  count++;
+>>>>>>> 32c7fde1271735b98166d6f8137b016bdf652395
 });
 
 /*
@@ -72,14 +85,24 @@ function onData(data) {
   //console.log("meteor onData: " + data);
   // let dataArr = data.split(",");
   // console.log(dataArr);
+<<<<<<< HEAD
   if (data <= 40) {
    console.log('number of #metoo: ' + count);
    console.log('arduino:' + data);
+=======
+  if (data == 13) {
+   console.log('number of #metoo: ' + count);
+   //console.log('arduino:' + data);
+>>>>>>> 32c7fde1271735b98166d6f8137b016bdf652395
    //console.log('led');
    writeSerialData(count + '|');
   } else {
     console.log('stop');
+<<<<<<< HEAD
    console.log('arduino:' + data);
+=======
+    console.log('arduino:' + data);
+>>>>>>> 32c7fde1271735b98166d6f8137b016bdf652395
 }
 }
 
