@@ -30,6 +30,7 @@ void loop() {
   Serial.println(ledPin1);
 
   unsigned int t = 100;   // t: delay time
+  
   if (Serial.available() > 0) {
     String s = Serial.readStringUntil('|');
     //Serial.print('revcd ');

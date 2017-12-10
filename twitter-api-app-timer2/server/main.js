@@ -35,32 +35,20 @@ var messageHistory = [];
 
 
 stream.on('data', function(event) {
+ 
+  var counter = 0;
 
- if (count == countMax) {
-  count = 0;
-}
- count++;
-});
+  var myInterval = Meteor.setInterval(function() {
+     counter ++
+     console.log("Interval called " + counter + " times...");
+  }, 60000);
 
-/*
-stream.on('data', function(event) {
-
-if (Meteor.isClient) {
-
-   var counter = 0;
-
-   var myInterval = Meteor.setInterval(function() {
-      counter ++
-      console.log("Interval called " + counter + " times...");
-   }, 60000);
-
-   
-         Meteor.clearInterval(myInterval);
-         console.log('Interval cleared...')
-         counter++
-      }
-   });
-*/
+ 
+        Meteor.clearInterval(myInterval);
+        console.log('Interval cleared...')
+        counter++
+     
+  });
 
 
 stream.on('error', function(error) {

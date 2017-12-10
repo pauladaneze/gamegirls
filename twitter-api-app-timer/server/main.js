@@ -28,12 +28,12 @@ var client = new Twitter({
 
 var stream = client.stream('statuses/filter', {track: '#metoo'});
 var count = 0;
-var countMax = 20;
+var countMax = 15;
 var messageHistory = [];
 //var timeout = 60000;
 //var limit = '1 minute';
 
-
+/*
 stream.on('data', function(event) {
 
  if (count == countMax) {
@@ -41,38 +41,30 @@ stream.on('data', function(event) {
 }
  count++;
 });
-
-/*
-stream.on('data', function(event) {
-
-if (Meteor.isClient) {
-
-   var counter = 0;
-
-   var myInterval = Meteor.setInterval(function() {
-      counter ++
-      console.log("Interval called " + counter + " times...");
-   }, 60000);
-
-   
-         Meteor.clearInterval(myInterval);
-         console.log('Interval cleared...')
-         counter++
-      }
-   });
 */
 
+stream.on('data', function(event) {
+ 
+  var counter = 0;
 
-stream.on('error', function(error) {
-  throw error;
-});
+  var myInterval = Meteor.setInterval(function() {
+     counter ++
+     console.log("Interval called " + counter + " times...");
+  }, 60000);
+
+ 
+        Meteor.clearInterval(myInterval);
+        console.log('Interval cleared...')
+        counter++
+     
+  });
 
 // parse the data from serial into meaningful objects
 function onData(data) {
   //console.log("meteor onData: " + data);
   // let dataArr = data.split(",");
   // console.log(dataArr);
-  if (data <= 40) {
+  if (data == 13) {
    console.log('number of #metoo: ' + count);
    console.log('arduino:' + data);
    //console.log('led');
@@ -83,7 +75,7 @@ function onData(data) {
 }
 }
 
-console.log('number of #metoo: ' + count);
+//console.log('number of #metoo: ' + count);
 //console.log('data from arduino: ' + data);
 
 parser.on('data', Meteor.bindEnvironment(onData));
