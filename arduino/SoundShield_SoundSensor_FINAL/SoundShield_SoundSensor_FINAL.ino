@@ -10,7 +10,7 @@ int led = 13; //LED test to SoundSensor//erase!!!
 int threshold = 40; //Change This  SoundSensor
 int volume; //SoundSendor
 int tweets = 0;
-int array[] = {"track001.mp3", "track002.mp3", "track003.mp3", "track004.mp3", "track005.mp3", "track006.mp3"};
+int array[] = {"track001.mp3", "track002.mp3", "track003.mp3"};
 long randNumber;
 
 String inputString = "";
@@ -48,8 +48,8 @@ void loop() {
     Serial.println(volume);
     
     for (int j = 0; j < tweets ; j++) {
-      randNumber = random(6);
-      Serial.println(randNumber);
+      randNumber = random(3);
+      //Serial.println(randNumber);
 
       MP3player.playMP3(array[randNumber]); // play track by file name.
 
@@ -68,6 +68,7 @@ void loop() {
     tweets = data.toInt();
     
   //  Serial.print('revcd');
+    Serial.print("tweets:");
     Serial.println(tweets);
     //String hexValue = tweets;
   }
