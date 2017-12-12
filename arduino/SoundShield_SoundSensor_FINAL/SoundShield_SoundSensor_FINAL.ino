@@ -7,7 +7,7 @@ SdFat sd; // Create object to handle SD functions
 SFEMP3Shield MP3player;
 
 int led = 13; //LED test to SoundSensor//erase!!!
-int threshold = 40; //Change This  SoundSensor
+int threshold = 300; //Change This  SoundSensor
 int volume; //SoundSendor
 int tweets = 0;
 int array[] = {"track001.mp3", "track002.mp3", "track003.mp3"};
@@ -41,7 +41,7 @@ void loop() {
 
 
 
-  if (volume <= threshold) {
+  if (volume >= threshold) {
     digitalWrite(led, HIGH); //Turn ON Led //LED test to SoundSensor//erase!!!
     //start playing track 1
     Serial.println("me too!");

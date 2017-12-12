@@ -8,7 +8,7 @@ const parser = new Readline();
 
 //serial port
 var port = new SerialPort('/dev/cu.usbmodem1411', {
-  baudRate: 9600
+ baudRate: 9600
 });
 port.pipe(parser);
 
@@ -28,7 +28,7 @@ var client = new Twitter({
 
 var stream = client.stream('statuses/filter', {track: '#metoo'});
 var count = 0;
-var countMax = 20;
+var countMax = 100;
 var messageHistory = [];
 //var timeout = 60000;
 //var limit = '1 minute';
@@ -75,7 +75,7 @@ function onData(data) {
   //console.log("meteor onData: " + data);
   // let dataArr = data.split(",");
   // console.log(dataArr);
-  if (data <= 40) {
+  if (data >= 500) {
    console.log('number of #metoo: ' + count);
    console.log('arduino:' + data);
 
