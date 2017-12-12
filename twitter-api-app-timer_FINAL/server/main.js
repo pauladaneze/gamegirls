@@ -44,7 +44,7 @@ function onStreamData(data) {
   count++;
   console.log('count has incremented', count);
   if (!interval) {
-   ç console.log("Tell the count to reset every minute");
+   console.log("Tell the count to reset every minute");
     interval = Meteor.setTimeout(function() {
       reset();
     }, timeout);
@@ -58,7 +58,7 @@ function onData(data) {
   console.log("meteor onData: " + data);
  // let dataArr = data.split(",");
  // console.log(dataArr);
- if (data >= 400) {
+ if (data >= 380) {
   console.log('number of #metoo: ' + count);
   console.log('arduino:' + data);
   //console.log('led');

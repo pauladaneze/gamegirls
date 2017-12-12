@@ -30,10 +30,6 @@ var stream = client.stream('statuses/filter', {track: '#metoo'});
 var count = 0;
 var countMax = 100;
 var messageHistory = [];
-//var timeout = 60000;
-//var limit = '1 minute';
-
-
 
 stream.on('data', function(event) {
 
@@ -44,27 +40,6 @@ stream.on('data', function(event) {
   count++;
 
 });
-
-/*
-stream.on('data', function(event) {
-
-if (Meteor.isClient) {
-
-   var counter = 0;
-
-   var myInterval = Meteor.setInterval(function() {
-      counter ++
-      console.log("Interval called " + counter + " times...");
-   }, 60000);
-
-   
-         Meteor.clearInterval(myInterval);
-         console.log('Interval cleared...')
-         counter++
-      }
-   });
-*/
-
 
 stream.on('error', function(error) {
   throw error;
